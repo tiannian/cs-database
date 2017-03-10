@@ -1,0 +1,22 @@
+db: 
+  image: postgres
+  ports:
+    - "54321:5432"
+www:
+  build: docker/www
+  volumes:
+    - "./php:/work"
+php:
+  build: docker/php
+  volumes_from:
+    - www
+  links:
+    - "db:db"
+nginx: 
+  build: docker/nginx
+  volumes_from:
+    - www
+  ports:
+    - "8001:80"
+  links:
+    - "php:php"
