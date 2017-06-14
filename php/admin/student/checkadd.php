@@ -33,6 +33,8 @@ try{
     $stat->bindParam(':password',$password);
     $stat->execute();
     
+    //echo $sql;
+    
     $url = "location:list.php";
     header($url);
 }catch (PDOException $ex) {

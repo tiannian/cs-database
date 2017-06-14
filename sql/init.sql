@@ -1,5 +1,3 @@
-CREATE DATABASE `htu`;
-
 -- htu_student表
 CREATE TABLE "htu_student" (
     "id" varchar(20) NOT NULL,

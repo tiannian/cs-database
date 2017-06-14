@@ -10,7 +10,8 @@ docker-compose up -d
 ```
 ### 导入数据
 ```bash
-docker exec -ti csdatabase_db_1 pgsql -U postgres -W -d htu -f ../sql/init.sql
+docker exec -ti csdatabase_db_1 psql -U postgres -W -c "CREATE DATABASE htu"
+docker exec -ti csdatabase_db_1 psql -U postgres -W -d htu -f /workspace/init.sql
 ```
 ### 退出系统
 ```bash

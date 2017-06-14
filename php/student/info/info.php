@@ -12,11 +12,11 @@ if($type != "student"){
 }
 
 $db = pdo_init();
-$sql = "select p.id,p.name,p.collage,htu_teacher.name as teacher from ( select * from htu_subject left join (select subject,score from htu_score where student=:id) as has on has.subject=htu_subject.id where has.subject isnull ) as p inner join htu_teacher on p.teacher=htu_teacher.id;";
+$sql = "select * from htu_student where id=:id";
 $stat = $db->prepare($sql);
 $stat->bindParam(':id',$user);
 $stat->execute();
-
+$value = $stat->fetch();
 ?>
 
 <!DOCTYPE HTML>
@@ -24,7 +24,7 @@ $stat->execute();
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>选择科目</title>
+	<title>查看个人信息</title>
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" />
 </head>
 <body>
@@ -55,47 +55,46 @@ $stat->execute();
         	<div class="col-xs-12">
             <ol class="breadcrumb">
               <li>学生</li>
-              <li>学生选课</li>
-              <li class="active">选择科目</li>
+              <li class="active">个人信息</li>
             </ol>
             </div>
         </div>
         <div class="row">
         	<div class="col-xs-3">
                 <div class="list-group">
-                    <a href="/student/choose/list.php" class="list-group-item active">选课管理</a>
-                    <a href="/student/score/list.php" class="list-group-item">分数查看</a>
+                    <a href="/student/choose/list.php" class="list-group-item">选课管理</a>
+                    <a href="/student/score/list.php" class="list-group-item active">分数查看</a>
                 </div>
             </div>
         	<div class="col-xs-9">
                 <div class="row">
                 	<div class="col-xs-12">
                         <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>课程编号</th>
-                                    <th>课程名</th>
-                                    <th>所属学院</th>
-                                    <th>授课教师</th>
-                                    <th>选择</th>
-                                </tr>
-                            </thead>
                             <tbody>
-                            <?php
-                                foreach ($stat as $value){
-                            ?>
                                 <tr>
+                                    <td>学号</td>
                                     <td><?php echo $value["id"]; ?></td>
-                                    <td><?php echo $value["name"]; ?></td>
-                                    <td><?php echo $value["collage"]; ?></td>
-                                    <td><?php echo $value["teacher"]; ?></td>
-                                    <td><button class="btn btn-default btn-xs infodelete" onClick="onClickDelete(<?php echo $value["id"]; ?>)">选择</button></td>
                                 </tr>
-                                
-                            <?php
-                                }
-                            ?>
-                                
+                                <tr>
+                                    <td>姓名</td>
+                                    <td><?php echo $value["name"]; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>年级</td>
+                                    <td><?php echo $value["grade"]; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>专业</td>
+                                    <td><?php echo $value["major"]; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>性别</td>
+                                    <td><?php echo $value["sex"]; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>学院</td>
+                                    <td><?php echo $value["collage"]; ?></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -108,7 +107,7 @@ $stat->execute();
     <script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function onClickDelete(id){
-            location.href = "checkadd.php?id="+id;
+            location.href = "del.php?id="+id;
         }
     </script>
 </body>

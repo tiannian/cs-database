@@ -1,5 +1,7 @@
 db: 
   image: postgres
+  volumes:
+    - "./sql:/workspace"
   ports:
     - "54321:5432"
 www:

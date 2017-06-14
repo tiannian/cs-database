@@ -34,10 +34,10 @@ $stat = $db->query($sql);
                 	<div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">成绩管理系统</span>
+                                <span class="sr-only">学生信息管理系统</span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">成绩管理系统</a>
+                            <a class="navbar-brand" href="#">学生信息管理系统</a>
                         </div>
                         <div class="collapse navbar-collapse">
                         	<ul class="nav navbar-nav navbar-right">
